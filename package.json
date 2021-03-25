@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -w",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "debugger": "nodemon --inspect-brk index.js"
   },
   "repository": {
     "type": "git",
