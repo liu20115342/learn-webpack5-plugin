@@ -1,8 +1,11 @@
-import {Compiler} from 'webpack'
+import {
+    Compiler,
+    sources
+} from 'webpack'
 import fs from 'fs/promises'
 
 const pluginName = 'Plugin1'
-
+const {RawSource} = sources
 class Plugin1 {
     apply(compiler: Compiler) {
         // compiler.hooks.environment.tap(pluginName, () => {
@@ -30,9 +33,22 @@ class Plugin1 {
         // compiler.hooks.done.tap(pluginName, (stats) => {
         //     console.log('done.tap 1111')
         // })
-        compiler.hooks.thisCompilation.tap(pluginName,compilation => {
-            debugger
-            console.log(compilation)
+        compiler.hooks.thisCompilation.tap(pluginName,(compilation) => {
+            // debugger
+            compilation.hooks.additionalAssets.tapPromise(pluginName,async () => {
+                const content = 'Hello plugin1'
+                // @ts-ignore
+                compilation.assets['a.txt'] = {
+                    size(): number {
+                        return content.length;
+                    },
+                    source(): string | Buffer {
+                        return content;
+                    }
+                }
+                return Promise.resolve();
+            })
+
         })
     }
 }
