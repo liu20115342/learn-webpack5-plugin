@@ -15,7 +15,22 @@ class Plugin1 {
             console.log('开始打包');
             console.log(compiler.options.context);
         })
-        
+
+        compiler.hooks.emit.tapAsync(pluginName, (compilation, cb) => {
+            setTimeout(() => {
+                console.log('emit.tap 1111')
+                cb()
+            }, 1000)
+        })
+
+        compiler.hooks.afterEmit.tap(pluginName, (compilation) => {
+            console.log('afterEmit.tap 1111')
+        })
+
+        compiler.hooks.done.tap(pluginName, (stats) => {
+            console.log('done.tap 1111')
+        })
+
     }
 }
 
