@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -w",
     "start": "nodemon index.js",
-    "debugger": "nodemon --inspect-brk index.js"
+    "debugger": "nodemon --inspect-brk index.js",
+    "dev": "webpack"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
+    "globby": "^11.0.3",
     "tapable": "^2.2.0"
   }
 }
